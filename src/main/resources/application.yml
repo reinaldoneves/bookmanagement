@@ -1,0 +1,9 @@
+spring
+    data
+        mongodb
+          authentication-database: admin
+          username: admin
+          password: 4m35m4d0v1z1nh0
+          database: admin
+          port: 27017
+          host: localhost

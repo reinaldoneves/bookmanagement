@@ -21,7 +21,7 @@ public class BookService implements GenericService<Book , BookRepository, String
     }
 
     @Override
-    public Book getEntityById(Long id) {
+    public Book getEntityById(String id) {
         return repository.findById(id).orElseThrow(
                 () -> new BookNotFoundException("Book", "id", id));
     }
@@ -67,12 +67,15 @@ public class BookService implements GenericService<Book , BookRepository, String
      * @param id
      */
     @Override
-    public void deleteEntity(Long id) {
+    public void deleteEntity(String id) {
         validateBook(id);
         repository.deleteById(id);
     }
 
-    private void validateBook(Long id) {
+    /**
+     *TODO: Implement business logic
+     **/
+    private void validateBook(String id) {
         Optional<Book> book = repository.findById(id);
         if (!book.isPresent()) {}
     }

@@ -6,7 +6,6 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 
 /**
  * Class responsible for <i>book</i>
@@ -19,9 +18,11 @@ public class Book implements Serializable {
 
     /**
      * The book identifier
+     * We'll let the id and the ISBN in case of books with multiple editions or
+     * other operation that may be necessary an extra identifier
      **/
     @Id
-    private BigInteger id;
+    private String id;
 
     /**
      * The international standard book number unique identifier

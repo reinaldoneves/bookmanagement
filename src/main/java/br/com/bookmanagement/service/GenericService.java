@@ -16,7 +16,7 @@ public interface GenericService<Entity, Repository extends MongoRepository, Para
     /**
      * Returns the entity based on the given id
      **/
-    Entity getEntityById(Long id);
+    Entity getEntityById(String id);
 
     /**
      * Returns the entity based on the given parameter
@@ -51,6 +51,6 @@ public interface GenericService<Entity, Repository extends MongoRepository, Para
      * Delete a entity from the database based on his id
      * @param id the id of the entity to be deleted
      */
-    void deleteEntity(Long id);
+    void deleteEntity(String id);
 
 }

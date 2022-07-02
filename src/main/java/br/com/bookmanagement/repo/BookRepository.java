@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface BookRepository extends MongoRepository<Book, Long> {
+public interface BookRepository extends MongoRepository<Book, String> {
 
     /**
      * 1) Lista de livros

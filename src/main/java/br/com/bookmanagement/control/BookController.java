@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @RestController
@@ -27,7 +28,7 @@ public class BookController {
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<Book> getBookById(@PathVariable("id") Long id){
+    public ResponseEntity<Book> getBookById(@PathVariable("id") String id){
         Book book = service.getEntityById(id);
         return new ResponseEntity<>(book, HttpStatus.OK);
     }
@@ -45,7 +46,7 @@ public class BookController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteBook(@PathVariable("id") Long id){
+    public ResponseEntity<?> deleteBook(@PathVariable("id") String id){
         service.deleteEntity(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

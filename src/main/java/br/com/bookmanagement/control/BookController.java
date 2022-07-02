@@ -38,16 +38,21 @@ public class BookController {
         return new ResponseEntity<>(book, HttpStatus.OK);
     }
 
-    @GetMapping("/findByIsbn/{isbn}")
-    public ResponseEntity<Book> getByISBN(@PathVariable("isbn") String isbn){
+    @GetMapping("/find/ByIsbn/{isbn}")
+    public ResponseEntity<Book> getByIsbn(@PathVariable("isbn") String isbn){
         Book book = service.getBookByIsbn(isbn);
         return new ResponseEntity<>(book, HttpStatus.OK);
     }
 
-    @GetMapping("/findByAuthor)/{author}")
+    @GetMapping("/find/ByAuthor/{author}")
     public ResponseEntity<List<Book>> getBookByAuthor(@PathVariable("author") String author){
-        List<Book> allThatAuthorBooks = service.getAllEntitiesByParameter(author);
-        return new ResponseEntity<>(allThatAuthorBooks, HttpStatus.OK);
+        List<Book> allThatAuthorsBooks = service.getAllEntitiesByParameter(author);
+        return new ResponseEntity<>(allThatAuthorsBooks, HttpStatus.OK);
+    }
+    @GetMapping("/find/ByTitle/{title}")
+    public ResponseEntity<Book> getBooksByTitle(@PathVariable("title") String title){
+        Book book  = service.getEntityByParameter(title);
+        return new ResponseEntity<>(book, HttpStatus.OK);
     }
 
     @PostMapping("/add")

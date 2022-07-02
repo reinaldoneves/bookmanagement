@@ -52,7 +52,7 @@ public class BookService implements GenericService<Book , BookRepository, String
 
     /**
      * Get all books by an author
-     * @param author the book writer
+     * @param author the books writer
      **/
     @Override
     public List<Book> getAllEntitiesByParameter(String author) {

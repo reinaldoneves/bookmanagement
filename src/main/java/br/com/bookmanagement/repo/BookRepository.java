@@ -1,14 +1,14 @@
 package br.com.bookmanagement.repo;
 
 import br.com.bookmanagement.model.Book;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface BookRepository extends JpaRepository<Book, Long> {
+public interface BookRepository extends MongoRepository<Book, Long> {
 
     /**
      * 1) Lista de livros
@@ -22,8 +22,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
      * - Não deve ser possível editar e remover livros que estão alugados
      *
      * */
-
-    Optional<Book> findByName(String name);
 
     Optional<Book> findByTitle(String title);
 

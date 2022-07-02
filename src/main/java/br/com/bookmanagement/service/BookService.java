@@ -27,8 +27,8 @@ public class BookService implements GenericService<Book , BookRepository, String
     }
 
     @Override
-    public Book getEntityByParameter(String name) {
-        return repository.findByName(name).orElse(null);
+    public Book getEntityByParameter(String title) {
+        return repository.findByTitle(title).orElse(null);
     }
 
     @Override

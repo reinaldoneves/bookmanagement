@@ -1,6 +1,6 @@
 package br.com.bookmanagement.service;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * @param <Parameter> the parameter to be used by the get methods
  * @author reinaldo_neves@hotmail.com
  * */
-public interface GenericService<Entity, Repository extends JpaRepository, Parameter> {
+public interface GenericService<Entity, Repository extends MongoRepository, Parameter> {
 
     /**
      * Returns the entity based on the given id

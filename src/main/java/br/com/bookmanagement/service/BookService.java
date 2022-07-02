@@ -28,7 +28,15 @@ public class BookService implements GenericService<Book , BookRepository, String
 
     @Override
     public Book getEntityByParameter(String title) {
-        return repository.findByTitle(title).orElse(null);
+        return repository.findByTitle(title).orElseThrow(
+                () -> new BookNotFoundException("Book", "title", title)
+        );
+    }
+
+    public Book getBookByIsbn(String isbn) {
+        return repository.findByIsbn(isbn).orElseThrow(
+                () -> new BookNotFoundException("Book", "isbn", isbn)
+        );
     }
 
     @Override
@@ -36,6 +44,16 @@ public class BookService implements GenericService<Book , BookRepository, String
         return repository.findAll();
     }
 
+    public List<Book> getAllBooksAvailable(Boolean isAvailable) {
+        return repository.findAllByIsAvailable(true).orElseThrow(
+                () -> new BookNotFoundException("Book", "available", null)
+        );
+    }
+
+    /**
+     * Get all books by an author
+     * @param author the book writer
+     **/
     @Override
     public List<Book> getAllEntitiesByParameter(String author) {
         return repository.findAllByAuthor(author).orElseThrow(
@@ -54,7 +72,7 @@ public class BookService implements GenericService<Book , BookRepository, String
 
     /**
      * Update a given book
-     * @param updatedBook
+     * @param updatedBook the book to be updated
      **/
     @Override
     public Book updateEntity(Book updatedBook) {
@@ -64,7 +82,7 @@ public class BookService implements GenericService<Book , BookRepository, String
     /**
      * Delete a given book
      * if the book is not available, then it can't be removed
-     * @param id
+     * @param id the id of the book to be deleted
      */
     @Override
     public void deleteEntity(String id) {
@@ -77,6 +95,6 @@ public class BookService implements GenericService<Book , BookRepository, String
      **/
     private void validateBook(String id) {
         Optional<Book> book = repository.findById(id);
-        if (!book.isPresent()) {}
+        if (book.isEmpty()) {}
     }
 }

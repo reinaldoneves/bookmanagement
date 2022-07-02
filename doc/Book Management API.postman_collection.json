@@ -45,6 +45,29 @@
 			"response": []
 		},
 		{
+			"name": "Buscar todos os livros disponíveis",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/bookmanagement/all/available/false",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"bookmanagement",
+						"all",
+						"available",
+						"false"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Editar livro",
 			"request": {
 				"method": "PUT",

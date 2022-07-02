@@ -20,10 +20,10 @@ public class BookController {
         this.service = bookService;
     }
 
-    @GetMapping("/all/available")
-    public ResponseEntity<List<Book>> getAllBooksAvailable(@PathVariable("id") Boolean isAvailable){
-        List<Book> allBooksAvaiable = service.getAllBooksAvailable(isAvailable);
-        return new ResponseEntity<>(allBooksAvaiable, HttpStatus.OK);
+    @GetMapping("/all/available/{isAvailable}")
+    public ResponseEntity<List<Book>> getAllBooksAvailable(@PathVariable("isAvailable") Boolean isAvailable){
+        List<Book> allBooksAvailable = service.getAllBooksAvailable(isAvailable);
+        return new ResponseEntity<>(allBooksAvailable, HttpStatus.OK);
     }
 
     @GetMapping("/all")

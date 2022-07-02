@@ -45,7 +45,7 @@ public class BookService implements GenericService<Book , BookRepository, String
     }
 
     public List<Book> getAllBooksAvailable(Boolean isAvailable) {
-        return repository.findAllByIsAvailable(true).orElseThrow(
+        return repository.findAllByIsAvailable(isAvailable).orElseThrow(
                 () -> new BookNotFoundException("Book", "available", null)
         );
     }

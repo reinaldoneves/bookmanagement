@@ -1,5 +1,6 @@
 package br.com.bookmanagement.model;
 
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -14,6 +15,7 @@ import java.io.Serializable;
 
 @Data
 @Document
+@Builder
 public class Book implements Serializable {
 
     /**
@@ -28,7 +30,7 @@ public class Book implements Serializable {
      * The international standard book number unique identifier
      */
     @Indexed(unique=true)
-    private String ISBN;
+    private String isbn;
 
     /**
      * The title of the book

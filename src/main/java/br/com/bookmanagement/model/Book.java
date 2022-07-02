@@ -32,6 +32,11 @@ public class Book implements Serializable {
     private String author;
 
     /**
+     * The book details and description
+     **/
+    private String details;
+
+    /**
      * The status indicating if the book is aviable
      * */
     private boolean isAvailable;

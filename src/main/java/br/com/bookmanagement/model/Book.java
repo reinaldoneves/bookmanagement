@@ -2,10 +2,9 @@ package br.com.bookmanagement.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import java.io.Serializable;
 
 /**
@@ -21,8 +20,14 @@ public class Book implements Serializable {
      * The book identifier
      **/
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    /**
+     * The international standard book number unique identifier
+     */
+    @Indexed(unique=true)
+    private String ISBN;
+
     /**
      * The title of the book
      **/

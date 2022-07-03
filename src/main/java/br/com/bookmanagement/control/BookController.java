@@ -20,10 +20,10 @@ public class BookController {
         this.service = bookService;
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Book> addBook(@RequestBody Book newBook){
-        Book book = service.createEntity(newBook);
-        return new ResponseEntity<>(book, HttpStatus.CREATED);
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteBook(@PathVariable("id") String id){
+        service.deleteEntity(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

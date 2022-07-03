@@ -1,12 +1,10 @@
 package br.com.bookmanagement.service;
 
-import br.com.bookmanagement.exception.BookAlreadyExistsException;
+import br.com.bookmanagement.exception.BookNotFoundException;
 import br.com.bookmanagement.model.Book;
 import br.com.bookmanagement.repo.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class BookService implements GenericService<Book , BookRepository, String>{
@@ -20,31 +18,16 @@ public class BookService implements GenericService<Book , BookRepository, String
     }
 
     /**
-     * Create a new book
-     * @param newBook the new book
-     **/
+     * Delete a given book
+     * if the book is not available, then it can't be removed
+     * @param id the id of the book to be deleted
+     */
     @Override
-    public Book createEntity(Book newBook) throws BookAlreadyExistsException {
-        if(doesExists(newBook.getIsbn())){
-            throw new BookAlreadyExistsException(CLASS_NAME, "isbn", newBook.getIsbn());
+    public void deleteEntity(String id) {
+        if(!repository.existsById(id)){
+            throw new BookNotFoundException(CLASS_NAME, "id", id);
         }
-        return repository.save(newBook);
-    }
-
-    /**
-     * Verifies if a book exists based on its internation standard book number
-     * @param isbn
-     * */
-    private boolean doesExists(String isbn) {
-        Boolean existsByIsbn = repository.existsBookByIsbn(isbn);
-
-        if (existsByIsbn) {
-            throw new BookAlreadyExistsException(CLASS_NAME,
-                    "isbn",
-                    isbn);
-        }
-
-        return false;
+        repository.deleteById(id);
     }
 
 }

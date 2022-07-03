@@ -28,5 +28,9 @@ class BookServiceTest {
         underTest = new BookService(bookRepository);
     }
 
+    @Test
+    @Disabled
+    void shouldDeleteABook() {
+    }
 
 }

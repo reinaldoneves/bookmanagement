@@ -13,10 +13,9 @@ import java.util.List;
  * */
 public interface GenericService<Entity, Repository extends MongoRepository, Parameter> {
 
-    /***
-     * The creation of a new entity
-     * @param newEntity the new entity to be created
-     * @return Entity newEntity itself
+    /**
+     * Delete a entity from the database based on his id
+     * @param id the id of the entity to be deleted
      */
-    Entity createEntity(Entity newEntity);
+    void deleteEntity(String id);
 }

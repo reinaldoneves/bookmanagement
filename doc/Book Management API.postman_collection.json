@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"ISBN\": \"0547951949\",\n  \"title\": \"The Lord of the rings: The fellowship of the ring\",\n  \"author\": \"J. R. R. Tolkien\",\n  \"details\": \"One Ring to rule them all, One Ring to find them, One Ring to bring them all and in the darkness bind them. In ancient times the Rings of Power were crafted by the Elven-smiths, and Sauron, the Dark Lord, forged the One Ring, filling it with his own power so that he could rule all others. But the One Ring was taken from him, and though he sought it throughout Middle-earth, it remained lost to him. After many ages it fell by chance into the hands of the hobbit Bilbo Baggins. From Sauron's fastness in the Dark Tower of Mordor, his power spread far and wide. Sauron gathered all the Great Rings to him, but always he searched for the One Ring that would complete his dominion. When Bilbo reached his eleventy-first birthday he disappeared, bequeathing to his young cousin Frodo the Ruling Ring and a perilous quest: to journey across Middle-earth, deep into the shadow of the Dark Lord, and destroy the Ring by casting it into the Cracks of Doom. The Lord of the Rings tells of the great quest undertaken by Frodo and the Fellowship of the Ring: Gandalf the Wizard; the hobbits Merry, Pippin, and Sam; Gimli the Dwarf; Legolas the Elf; Boromir of Gondor; and a tall, mysterious stranger called Strider.\",\n  \"isAvailable\": true\n}",
+					"raw": "{\n  \"isbn\": \"9780008376130\",\n  \"title\": \"The Lord of the rings: The two towers\",\n  \"author\": \"J. R. R. Tolkien\",\n  \"details\": \"Frodo and the Companions of the Ring have been beset by danger during their quest to prevent the Ruling Ring from falling into the hands of the Dark Lord by destroying it in the Cracks of Doom. They have lost the wizard, Gandalf, in the battle with an evil spirit in the Mines of Moria; and at the Falls of Rauros, Boromir, seduced by the power of the Ring, tried to seize it by force. While Frodo and Sam made their escape the rest of the company were attacked by Orcs. Now they continue their journey alone down the great River Anduin - alone, that is, save for the mysterious creeping figure that follows wherever they go. The text of this edition has been fully corrected and revised in collaboration with Christopher Tolkien and is accompanied by sixteen watercolour paintings from Alan Lee.\",\n  \"isAvailable\": true\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -130,6 +130,14 @@
 						"The Lord of the rings: The fellowship of the ring"
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pegar livro emprestado",
+			"request": {
+				"method": "GET",
+				"header": []
 			},
 			"response": []
 		},

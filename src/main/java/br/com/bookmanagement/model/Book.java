@@ -28,6 +28,7 @@ public class Book implements Serializable {
 
     /**
      * The international standard book number unique identifier
+     * ISO 2108
      */
     @Indexed(unique=true)
     private String isbn;

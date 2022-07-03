@@ -1,7 +1,6 @@
 package br.com.bookmanagement.service;
 
-import br.com.bookmanagement.exception.AuthorNotFoundException;
-import br.com.bookmanagement.exception.BookNotFoundException;
+import br.com.bookmanagement.exception.BookAlreadyExistsException;
 import br.com.bookmanagement.model.Book;
 import br.com.bookmanagement.repo.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,60 +20,31 @@ public class BookService implements GenericService<Book , BookRepository, String
     }
 
     /**
-     * Get a book by internal identifier
-     * @param id the book identifier
+     * Create a new book
+     * @param newBook the new book
      **/
     @Override
-    public Book getEntityById(String id) {
-        return repository.findById(id).orElseThrow(
-                () -> new BookNotFoundException(CLASS_NAME, "id", id));
+    public Book createEntity(Book newBook) throws BookAlreadyExistsException {
+        if(doesExists(newBook.getIsbn())){
+            throw new BookAlreadyExistsException(CLASS_NAME, "isbn", newBook.getIsbn());
+        }
+        return repository.save(newBook);
     }
 
     /**
-     * Get a book by its Title
-     * @param title the book's Title
-     **/
-    @Override
-    public Book getEntityByParameter(String title) {
-        return repository.findByTitle(title).orElseThrow(
-                () -> new BookNotFoundException(CLASS_NAME, "title", title)
-        );
-    }
+     * Verifies if a book exists based on its internation standard book number
+     * @param isbn
+     * */
+    private boolean doesExists(String isbn) {
+        Boolean existsByIsbn = repository.existsBookByIsbn(isbn);
 
-    /**
-     * Get a book by ISBN
-     * @param isbn the iternational standard book number
-     **/
-    public Book getBookByIsbn(String isbn) {
-        return repository.findByIsbn(isbn).orElseThrow(
-                () -> new BookNotFoundException(CLASS_NAME, "isbn", isbn)
-        );
-    }
+        if (existsByIsbn) {
+            throw new BookAlreadyExistsException(CLASS_NAME,
+                    "isbn",
+                    isbn);
+        }
 
-    @Override
-    public List<Book> getAllEntities() {
-        return repository.findAll();
-    }
-
-    /**
-     * Get all books by isAvailable status
-     * @param isAvailable the status of the book
-     **/
-    public List<Book> getAllBooksAvailable(Boolean isAvailable) {
-        return repository.findAllByIsAvailable(isAvailable).orElseThrow(
-                () -> new BookNotFoundException(CLASS_NAME, "available", null)
-        );
-    }
-
-    /**
-     * Get all books by an author
-     * @param author the books writer
-     **/
-    @Override
-    public List<Book> getAllEntitiesByParameter(String author) {
-        return repository.findAllByAuthor(author).orElseThrow(
-                () -> new AuthorNotFoundException(CLASS_NAME, "author", author)
-        );
+        return false;
     }
 
 }

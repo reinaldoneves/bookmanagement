@@ -13,24 +13,10 @@ import java.util.List;
  * */
 public interface GenericService<Entity, Repository extends MongoRepository, Parameter> {
 
-    /**
-     * Returns the entity based on the given id
-     **/
-    Entity getEntityById(String id);
-
-    /**
-     * Returns the entity based on the given parameter
-     **/
-    Entity getEntityByParameter(Parameter parameter);
-
     /***
-     * Retrieve the {@link List <Entity>} of all entities
+     * The creation of a new entity
+     * @param newEntity the new entity to be created
+     * @return Entity newEntity itself
      */
-    List<Entity> getAllEntities();
-
-    /***
-     * Retrieve the {@link List <Entity>} of all entities bye the parameter
-     */
-    List<Entity> getAllEntitiesByParameter(Parameter parameter);
-
+    Entity createEntity(Entity newEntity);
 }

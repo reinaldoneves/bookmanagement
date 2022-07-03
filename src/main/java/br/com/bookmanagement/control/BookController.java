@@ -44,13 +44,6 @@ public class BookController {
         return new ResponseEntity<>(book, HttpStatus.OK);
     }
 
-    @GetMapping("/borrow/{isbn}")
-    public ResponseEntity<Book> borrowABook(@PathVariable("isbn") String isbn){
-        //TODO: should be a put method
-        Book book = service.borrowABook(isbn);
-        return new ResponseEntity<>(book, HttpStatus.ACCEPTED);
-    }
-
     @GetMapping("/find/ByAuthor/{author}")
     public ResponseEntity<List<Book>> getBookByAuthor(@PathVariable("author") String author){
         List<Book> allThatAuthorsBooks = service.getAllEntitiesByParameter(author);
@@ -60,24 +53,6 @@ public class BookController {
     public ResponseEntity<Book> getBooksByTitle(@PathVariable("title") String title){
         Book book  = service.getEntityByParameter(title);
         return new ResponseEntity<>(book, HttpStatus.OK);
-    }
-
-    @PostMapping("/add")
-    public ResponseEntity<Book> addBook(@RequestBody Book newBook){
-        Book book = service.createEntity(newBook);
-        return new ResponseEntity<>(book, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/update")
-    public ResponseEntity<Book> updateBook(@RequestBody Book updatedBook){
-        Book book = service.updateEntity(updatedBook);
-        return new ResponseEntity<>(book, HttpStatus.ACCEPTED);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteBook(@PathVariable("id") String id){
-        service.deleteEntity(id);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

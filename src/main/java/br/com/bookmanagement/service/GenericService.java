@@ -33,24 +33,4 @@ public interface GenericService<Entity, Repository extends MongoRepository, Para
      */
     List<Entity> getAllEntitiesByParameter(Parameter parameter);
 
-    /***
-     * The creation of a new entity
-     * @param newEntity the new entity to be created
-     * @return Entity newEntity itself
-     */
-    Entity createEntity(Entity newEntity);
-
-    /***
-     * Update the character
-     * @param entityUpdated the entity to be updated
-     * @return Entity updated itsef
-     */
-    Entity updateEntity(Entity entityUpdated);
-
-    /**
-     * Delete a entity from the database based on his id
-     * @param id the id of the entity to be deleted
-     */
-    void deleteEntity(String id);
-
 }

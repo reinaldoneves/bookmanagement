@@ -2,6 +2,7 @@ package br.com.bookmanagement.service;
 
 import br.com.bookmanagement.exception.AuthorNotFoundException;
 import br.com.bookmanagement.exception.BookAlreadyExistsException;
+import br.com.bookmanagement.exception.BookNotAvaiableException;
 import br.com.bookmanagement.exception.BookNotFoundException;
 import br.com.bookmanagement.model.Book;
 import br.com.bookmanagement.repo.BookRepository;
@@ -22,12 +23,20 @@ public class BookService implements GenericService<Book , BookRepository, String
         this.repository = repository;
     }
 
+    /**
+     * Get a book by internal identifier
+     * @param id the book identifier
+     **/
     @Override
     public Book getEntityById(String id) {
         return repository.findById(id).orElseThrow(
                 () -> new BookNotFoundException(CLASS_NAME, "id", id));
     }
 
+    /**
+     * Get a book by its Title
+     * @param title the book's Title
+     **/
     @Override
     public Book getEntityByParameter(String title) {
         return repository.findByTitle(title).orElseThrow(
@@ -35,10 +44,27 @@ public class BookService implements GenericService<Book , BookRepository, String
         );
     }
 
+    /**
+     * Get a book by ISBN
+     * @param isbn the iternational standard book number
+     **/
     public Book getBookByIsbn(String isbn) {
         return repository.findByIsbn(isbn).orElseThrow(
                 () -> new BookNotFoundException(CLASS_NAME, "isbn", isbn)
         );
+    }
+
+    /**
+     * Borrow a book from the libary if it is available
+     * @param isbn the iternational standard book number
+     **/
+    public Book borrowABook(String isbn) {
+        Book borrowdBook = getBookByIsbn(isbn);
+        if(!borrowdBook.isAvailable()){
+            throw new BookNotAvaiableException(CLASS_NAME, "isbn", isbn);
+        }
+        borrowdBook.setAvailable(false);
+        return borrowdBook;
     }
 
     @Override
@@ -46,6 +72,10 @@ public class BookService implements GenericService<Book , BookRepository, String
         return repository.findAll();
     }
 
+    /**
+     * Get all books by isAvailable status
+     * @param isAvailable the status of the book
+     **/
     public List<Book> getAllBooksAvailable(Boolean isAvailable) {
         return repository.findAllByIsAvailable(isAvailable).orElseThrow(
                 () -> new BookNotFoundException(CLASS_NAME, "available", null)
@@ -75,24 +105,15 @@ public class BookService implements GenericService<Book , BookRepository, String
         return repository.save(newBook);
     }
 
-
-//    public void addStudent(Student student) {
-//        Boolean existsEmail = studentRepository
-//                .selectExistsEmail(student.getEmail());
-//        if (existsEmail) {
-//            throw new BadRequestException(
-//                    "Email " + student.getEmail() + " taken");
-//        }
-//
-//        studentRepository.save(student);
-//    }
-
     /**
-     * Update a given book
+     * Update a given book if it is available
      * @param updatedBook the book to be updated
      **/
     @Override
     public Book updateEntity(Book updatedBook) {
+        if(!updatedBook.isAvailable()){
+            throw new BookNotAvaiableException(CLASS_NAME, "Title", updatedBook.getTitle());
+        }
         return repository.save(updatedBook);
     }
 
@@ -109,6 +130,10 @@ public class BookService implements GenericService<Book , BookRepository, String
         repository.deleteById(id);
     }
 
+    /**
+     * Verifies if a book exists based on its internation standard book number
+     * @param isbn
+     * */
     private boolean doesExists(String isbn) {
         Boolean existsByIsbn = repository.selectExistsIsbn(isbn);
 

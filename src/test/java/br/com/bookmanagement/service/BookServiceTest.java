@@ -15,6 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
@@ -46,7 +47,7 @@ class BookServiceTest {
 //        //When
 //        underTest.getEntityById(book.getId());
 //        //Then
-////        assertDoesNotThrow(() -> new BookNotFoundException("Book", "id", id));
+//        assertDoesNotThrow(() -> new BookNotFoundException("Book", "id", book.getId()));
     }
 
     @Test
@@ -119,27 +120,5 @@ class BookServiceTest {
 
         verify(bookRepository, never()).save(any());
     }
-
-//    @Test
-//    void willThrowWhenEmailIsTaken() {
-//        // given
-//        Student student = new Student(
-//                "Jamila",
-//                "jamila@gmail.com",
-//                Gender.FEMALE
-//        );
-//
-//        given(studentRepository.selectExistsEmail(anyString()))
-//                .willReturn(true);
-//
-//        // when
-//        // then
-//        assertThatThrownBy(() -> underTest.addStudent(student))
-//                .isInstanceOf(BadRequestException.class)
-//                .hasMessageContaining("Email " + student.getEmail() + " taken");
-//
-//        verify(studentRepository, never()).save(any());
-//
-//    }
 
 }

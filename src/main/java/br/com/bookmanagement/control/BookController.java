@@ -44,6 +44,12 @@ public class BookController {
         return new ResponseEntity<>(book, HttpStatus.OK);
     }
 
+    @GetMapping("/borrow/{isbn}")
+    public ResponseEntity<Book> borrowABook(@PathVariable("isbn") String isbn){
+        Book book = service.getBookByIsbn(isbn);
+        return new ResponseEntity<>(book, HttpStatus.OK);
+    }
+
     @GetMapping("/find/ByAuthor/{author}")
     public ResponseEntity<List<Book>> getBookByAuthor(@PathVariable("author") String author){
         List<Book> allThatAuthorsBooks = service.getAllEntitiesByParameter(author);

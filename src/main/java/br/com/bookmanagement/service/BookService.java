@@ -64,7 +64,7 @@ public class BookService implements GenericService<Book , BookRepository, String
             throw new BookNotAvaiableException(CLASS_NAME, "isbn", isbn);
         }
         borrowdBook.setAvailable(false);
-        return borrowdBook;
+        return repository.save(borrowdBook);
     }
 
     @Override
@@ -135,7 +135,7 @@ public class BookService implements GenericService<Book , BookRepository, String
      * @param isbn
      * */
     private boolean doesExists(String isbn) {
-        Boolean existsByIsbn = repository.selectExistsIsbn(isbn);
+        Boolean existsByIsbn = repository.existsBookByIsbn(isbn);
 
         if (existsByIsbn) {
             throw new BookAlreadyExistsException(CLASS_NAME,

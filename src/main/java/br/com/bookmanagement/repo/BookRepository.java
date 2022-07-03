@@ -10,19 +10,6 @@ import java.util.Optional;
 @Repository
 public interface BookRepository extends MongoRepository<Book, String> {
 
-    /**
-     * 1) Lista de livros
-     * - Serviço para pesquisar livros (nome, autor, etc)
-     * - Serviço para exibir detalhes de um livro
-     * - Serviço para permitir alugar um livro
-     * - Não permitir alugar um livro já alugado
-     *
-     * 2) CRUD de livros
-     * - Serviço para cadastro, edição e remoção de livros
-     * - Não deve ser possível editar e remover livros que estão alugados
-     *
-     * */
-
     Optional<Book> findByTitle(String title);
 
     Optional<List<Book>>findAllByIsAvailable(Boolean isAvailable);
@@ -31,5 +18,5 @@ public interface BookRepository extends MongoRepository<Book, String> {
 
     Optional<Book> findByIsbn(String isbn);
 
-    Boolean selectExistsIsbn(String isbn);
+    Boolean existsBookByIsbn(String isbn);
 }

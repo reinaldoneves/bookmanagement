@@ -46,7 +46,7 @@ public class BookController {
 
     @GetMapping("/borrow/{isbn}")
     public ResponseEntity<Book> borrowABook(@PathVariable("isbn") String isbn){
-        Book book = service.getBookByIsbn(isbn);
+        Book book = service.borrowABook(isbn);
         return new ResponseEntity<>(book, HttpStatus.OK);
     }
 

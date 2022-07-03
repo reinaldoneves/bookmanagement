@@ -30,4 +30,6 @@ public interface BookRepository extends MongoRepository<Book, String> {
     Optional<List<Book>> findAllByAuthor(String author);
 
     Optional<Book> findByIsbn(String isbn);
+
+    Boolean selectExistsIsbn(String isbn);
 }

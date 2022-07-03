@@ -1,6 +1,7 @@
 package br.com.bookmanagement.service;
 
 import br.com.bookmanagement.exception.AuthorNotFoundException;
+import br.com.bookmanagement.exception.BookAlreadyExistsException;
 import br.com.bookmanagement.exception.BookNotFoundException;
 import br.com.bookmanagement.model.Book;
 import br.com.bookmanagement.repo.BookRepository;
@@ -14,6 +15,7 @@ import java.util.Optional;
 public class BookService implements GenericService<Book , BookRepository, String>{
 
     private final BookRepository repository;
+    private final String CLASS_NAME = Book.class.getSimpleName();
 
     @Autowired
     public BookService(BookRepository repository) {
@@ -23,19 +25,19 @@ public class BookService implements GenericService<Book , BookRepository, String
     @Override
     public Book getEntityById(String id) {
         return repository.findById(id).orElseThrow(
-                () -> new BookNotFoundException("Book", "id", id));
+                () -> new BookNotFoundException(CLASS_NAME, "id", id));
     }
 
     @Override
     public Book getEntityByParameter(String title) {
         return repository.findByTitle(title).orElseThrow(
-                () -> new BookNotFoundException("Book", "title", title)
+                () -> new BookNotFoundException(CLASS_NAME, "title", title)
         );
     }
 
     public Book getBookByIsbn(String isbn) {
         return repository.findByIsbn(isbn).orElseThrow(
-                () -> new BookNotFoundException("Book", "isbn", isbn)
+                () -> new BookNotFoundException(CLASS_NAME, "isbn", isbn)
         );
     }
 
@@ -46,7 +48,7 @@ public class BookService implements GenericService<Book , BookRepository, String
 
     public List<Book> getAllBooksAvailable(Boolean isAvailable) {
         return repository.findAllByIsAvailable(isAvailable).orElseThrow(
-                () -> new BookNotFoundException("Book", "available", null)
+                () -> new BookNotFoundException(CLASS_NAME, "available", null)
         );
     }
 
@@ -57,7 +59,7 @@ public class BookService implements GenericService<Book , BookRepository, String
     @Override
     public List<Book> getAllEntitiesByParameter(String author) {
         return repository.findAllByAuthor(author).orElseThrow(
-                () -> new AuthorNotFoundException("Book", "author", author)
+                () -> new AuthorNotFoundException(CLASS_NAME, "author", author)
         );
     }
 
@@ -66,9 +68,24 @@ public class BookService implements GenericService<Book , BookRepository, String
      * @param newBook the new book
      **/
     @Override
-    public Book createEntity(Book newBook) {
+    public Book createEntity(Book newBook) throws BookAlreadyExistsException {
+        if(doesExists(newBook.getIsbn())){
+            throw new BookAlreadyExistsException(CLASS_NAME, "isbn", newBook.getIsbn());
+        }
         return repository.save(newBook);
     }
+
+
+//    public void addStudent(Student student) {
+//        Boolean existsEmail = studentRepository
+//                .selectExistsEmail(student.getEmail());
+//        if (existsEmail) {
+//            throw new BadRequestException(
+//                    "Email " + student.getEmail() + " taken");
+//        }
+//
+//        studentRepository.save(student);
+//    }
 
     /**
      * Update a given book
@@ -86,15 +103,21 @@ public class BookService implements GenericService<Book , BookRepository, String
      */
     @Override
     public void deleteEntity(String id) {
-        validateBook(id);
+        if(!repository.existsById(id)){
+            throw new BookNotFoundException(CLASS_NAME, "id", id);
+        }
         repository.deleteById(id);
     }
 
-    /**
-     *TODO: Implement business logic
-     **/
-    private void validateBook(String id) {
-        Optional<Book> book = repository.findById(id);
-        if (book.isEmpty()) {}
+    private boolean doesExists(String isbn) {
+        Boolean existsByIsbn = repository.selectExistsIsbn(isbn);
+
+        if (existsByIsbn) {
+            throw new BookAlreadyExistsException(CLASS_NAME,
+                    "isbn",
+                    isbn);
+        }
+
+        return false;
     }
 }

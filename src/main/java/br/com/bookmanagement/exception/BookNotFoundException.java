@@ -12,7 +12,7 @@ public class BookNotFoundException extends GeneralException{
         super(resourceName,
                 fieldName,
                 fieldValue,
-                String.format("%s not found with %s : '%s'", resourceName, fieldName, fieldValue));
+                String.format("%s not found with %s : %s", resourceName, fieldName, fieldValue));
     }
 
 }

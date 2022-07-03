@@ -12,7 +12,7 @@ public class BookNotAvaiableException extends GeneralException{
         super(resourceName,
                 fieldName,
                 fieldValue,
-                String.format("%s not available with %s : '%s'", resourceName, fieldName, fieldValue));
+                String.format("%s not available with %s : %s", resourceName, fieldName, fieldValue));
     }
 
 }

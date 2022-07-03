@@ -68,6 +68,72 @@
 			"response": []
 		},
 		{
+			"name": "Buscar por ISBN",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/bookmanagement/findByIsbn/0547951949",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"bookmanagement",
+						"findByIsbn",
+						"0547951949"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar livros por autor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/bookmanagement/findByIsbn/0547951949",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"bookmanagement",
+						"findByIsbn",
+						"0547951949"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar livros pelo título",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/bookmanagement/findByAuthor/The Lord of the rings: The fellowship of the ring",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"bookmanagement",
+						"findByAuthor",
+						"The Lord of the rings: The fellowship of the ring"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Editar livro",
 			"request": {
 				"method": "PUT",
@@ -89,7 +155,7 @@
 			"response": []
 		},
 		{
-			"name": "New Request",
+			"name": "Remover livro",
 			"request": {
 				"method": "DELETE",
 				"header": [],

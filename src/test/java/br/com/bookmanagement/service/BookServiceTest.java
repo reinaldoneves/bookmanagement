@@ -1,14 +1,23 @@
 package br.com.bookmanagement.service;
 
+import br.com.bookmanagement.repo.BookRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class BookServiceTest {
 
+    @Mock
+    private BookRepository bookRepository;
+
+    private BookService underTest;
+
     @BeforeEach
     void setUp() {
+        underTest = new BookService(bookRepository);
     }
 
     @Test
@@ -16,34 +25,34 @@ class BookServiceTest {
     }
 
     @Test
-    void getEntityByParameter() {
+    void shouldGetBookByTitle() {
     }
 
     @Test
-    void getBookByIsbn() {
+    void shouldGetBookByIsbn() {
     }
 
     @Test
-    void getAllEntities() {
+    void shouldGetAllBooks() {
     }
 
     @Test
-    void getAllBooksAvailable() {
+    void shouldGetAllBooksAvailable() {
     }
 
     @Test
-    void getAllEntitiesByParameter() {
+    void shouldGetAllAuthorsBook() {
     }
 
     @Test
-    void createEntity() {
+    void shouldCreateANewBook() {
     }
 
     @Test
-    void updateEntity() {
+    void shouldUpdateABook() {
     }
 
     @Test
-    void deleteEntity() {
+    void shouldDeleteABook() {
     }
 }

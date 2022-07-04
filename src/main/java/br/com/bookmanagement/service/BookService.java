@@ -1,5 +1,6 @@
 package br.com.bookmanagement.service;
 
+import br.com.bookmanagement.exception.BookNotAvaiableException;
 import br.com.bookmanagement.exception.BookNotFoundException;
 import br.com.bookmanagement.model.Book;
 import br.com.bookmanagement.repo.BookRepository;
@@ -18,16 +19,18 @@ public class BookService implements GenericService<Book , BookRepository, String
     }
 
     /**
-     * Delete a given book
-     * if the book is not available, then it can't be removed
-     * @param id the id of the book to be deleted
-     */
+     * Update a given book if it is available
+     * @param updatedBook the book to be updated
+     **/
     @Override
-    public void deleteEntity(String id) {
-        if(!repository.existsById(id)){
-            throw new BookNotFoundException(CLASS_NAME, "id", id);
+    public Book updateEntity(Book updatedBook) throws BookNotFoundException, BookNotAvaiableException {
+        if(!repository.existsById(updatedBook.getId())){
+            throw new BookNotFoundException(CLASS_NAME, "Title", updatedBook.getTitle());
         }
-        repository.deleteById(id);
+        if(!updatedBook.isAvailable()){
+            throw new BookNotAvaiableException(CLASS_NAME, "Title", updatedBook.getTitle());
+        }
+        return repository.save(updatedBook);
     }
 
 }

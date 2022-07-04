@@ -1,5 +1,7 @@
 package br.com.bookmanagement.service;
 
+import br.com.bookmanagement.exception.BookNotAvaiableException;
+import br.com.bookmanagement.exception.GeneralException;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
@@ -13,9 +15,10 @@ import java.util.List;
  * */
 public interface GenericService<Entity, Repository extends MongoRepository, Parameter> {
 
-    /**
-     * Delete a entity from the database based on his id
-     * @param id the id of the entity to be deleted
+    /***
+     * Update the character
+     * @param entityUpdated the entity to be updated
+     * @return Entity updated itsef
      */
-    void deleteEntity(String id);
+    Entity updateEntity(Entity entityUpdated) throws BookNotAvaiableException;
 }

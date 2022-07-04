@@ -111,6 +111,9 @@ public class BookService implements GenericService<Book , BookRepository, String
      **/
     @Override
     public Book updateEntity(Book updatedBook) {
+        if(!repository.existsById(updatedBook.getId())){
+            throw new BookNotFoundException(CLASS_NAME, "Title", updatedBook.getTitle());
+        }
         if(!updatedBook.isAvailable()){
             throw new BookNotAvaiableException(CLASS_NAME, "Title", updatedBook.getTitle());
         }

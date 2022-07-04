@@ -21,12 +21,7 @@ public class BookController {
 
     @PutMapping("/update")
     public ResponseEntity<Book> updateBook(@RequestBody Book updatedBook) throws BookNotAvaiableException {
-        Book book = null;
-        try {
-            book = service.updateEntity(updatedBook);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        Book book = service.updateEntity(updatedBook);
         return new ResponseEntity<>(book, HttpStatus.ACCEPTED);
     }
 
